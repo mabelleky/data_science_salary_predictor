@@ -1,3 +1,11 @@
+"""
+Created on Sun Aug 16  10:22:29 2020
+
+author: Ken Jee - Github username: PlayingNumbers
+url: https://github.com/PlayingNumbers/ds_salary_proj
+
+"""
+
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 from selenium import webdriver
 import time
@@ -40,15 +48,15 @@ def get_jobs(keyword, num_jobs, verbose, path, sleep_time):
             driver.find_element_by_css_selector('[alt="Close"]').click()  # clicking to the X.
             print("X out worked")
         except NoSuchElementException:
-            print("X out failed")
+            print("X out failed1")
             pass
 
-        try:
-            driver.find_element_by_class_name("SVGInline modal_closeIcon").click()  # clicking to the X.
-            print("X out worked")
-        except NoSuchElementException:
-            print("X out failed")
-            pass
+        # try:
+        #     driver.find_element_by_class_name("SVGInline modal_closeIcon").click()  # clicking to the X.
+        #     print("X out worked")
+        # except NoSuchElementException:
+        #     print("X out failed2")
+        #     pass
 
         # Going through each job in this page
         job_buttons = driver.find_elements_by_class_name(
@@ -74,7 +82,12 @@ def get_jobs(keyword, num_jobs, verbose, path, sleep_time):
                     time.sleep(5)
 
             try:
-                salary_estimate = driver.find_element_by_xpath('.//span[@class="gray salary"]').text
+                # salary_estimate = driver.find_element_by_xpath("//span[@class='gray salary']").text
+                #salary_estimate = driver.find_elements_by_class_name("gray salary")
+
+                # check div with class salary, then take text from child span class gray
+                salary_estimate= driver.find_element_by_css_selector('div.salary>span.gray').text
+
             except NoSuchElementException:
                 salary_estimate = -1  # You need to set a "not found value. It's important."
 
