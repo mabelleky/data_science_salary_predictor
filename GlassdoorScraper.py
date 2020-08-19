@@ -51,12 +51,12 @@ def get_jobs(keyword, num_jobs, verbose, path, sleep_time):
             print("X out failed1")
             pass
 
-        # try:
-        #     driver.find_element_by_class_name("SVGInline modal_closeIcon").click()  # clicking to the X.
-        #     print("X out worked")
-        # except NoSuchElementException:
-        #     print("X out failed2")
-        #     pass
+        try:
+            driver.find_element_by_class_name("SVGInline modal_closeIcon").click()  # clicking to the X.
+            print("X out worked")
+        except NoSuchElementException:
+            print("X out failed2")
+            pass
 
         # Going through each job in this page
         job_buttons = driver.find_elements_by_class_name(
@@ -79,15 +79,12 @@ def get_jobs(keyword, num_jobs, verbose, path, sleep_time):
                     job_description = driver.find_element_by_xpath('.//div[@class="jobDescriptionContent desc"]').text
                     collected_successfully = True
                 except:
-                    time.sleep(5)
+                    time.sleep(2)
 
             try:
-                # salary_estimate = driver.find_element_by_xpath("//span[@class='gray salary']").text
-                #salary_estimate = driver.find_elements_by_class_name("gray salary")
-
+                #salary_estimate = driver.find_element_by_xpath("//span[@class='gray salary']").text
                 # check div with class salary, then take text from child span class gray
                 salary_estimate= driver.find_element_by_css_selector('div.salary>span.gray').text
-
             except NoSuchElementException:
                 salary_estimate = -1  # You need to set a "not found value. It's important."
 
