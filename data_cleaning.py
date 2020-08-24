@@ -53,7 +53,26 @@ dataFrame['company_age'] = dataFrame['Founded'].apply(lambda x: x if x < 0
                                                       else 2020 - x)
 
 # add Province column for Locations
+switchCase = {
+    'calgary': 'AB',
+    'edmonton': 'AB',
+    'burnaby': 'BC',
+    'vancouver': 'BC',
+    'brampton': 'ON',
+    'markham': 'ON',
+    'missisauga': 'ON',
+    'ottawa': 'ON',
+    'toronto': 'ON',
+    'waterloo': 'ON',
+    'regina': 'SK',
+    'montreal': 'QC',
+    'saint-laurent': 'QC',
+    }
 
+def checkProvince(cityName):
+    return switchCase.get(cityName.lower(), "-1")
+
+dataFrame['Province'] = dataFrame['Location'].apply(lambda x: checkProvince(x))
 
 # parsing thru job descriptions
 
