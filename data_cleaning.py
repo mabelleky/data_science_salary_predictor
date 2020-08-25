@@ -16,7 +16,7 @@ dataFrame = pd.read_csv('glassdoor_jobs.csv')
 # parsing out salaries with lambda functions - DONE
 # Removing numbers for Company Name, text only - DONE
 # Age of Company - DONE
-# add Province column for Location (Containing city names)
+# add Province column for Location (Containing city names) - DONE
 # parsing thru job description (python, etc.)
 
 """
@@ -43,14 +43,14 @@ dataFrame['avg_salary'] = (dataFrame.min_salary+dataFrame.max_salary)/2
 # parsing company names
 
 dataFrame['company_name_text'] = dataFrame.apply(lambda x: x['Company Name']
-                                                 if x['Rating'] < 0
-                                                 else x['Company Name'][:-3],
-                                                 axis = 1)
+                                            if x['Rating'] < 0
+                                            else x['Company Name'][:-3],
+                                            axis = 1)
 
 # Age of Company
 
 dataFrame['company_age'] = dataFrame['Founded'].apply(lambda x: x if x < 0
-                                                      else 2020 - x)
+                                else 2020 - x)
 
 # add Province column for Locations
 switchCase = {
@@ -74,10 +74,37 @@ def checkProvince(cityName):
 
 dataFrame['Province'] = dataFrame['Location'].apply(lambda x: checkProvince(x))
 
-# parsing thru job descriptions
+# parsing thru job descriptions based some top data science languages & tools 
 
+#python
+dataFrame['python_yn'] = dataFrame['Job Description'].apply(lambda x: 
+                                            1 if 'python' in x.lower() else 0)
+dataFrame.python_yn.value_counts()
 
+#r studio
+dataFrame['rstudio_yn'] = dataFrame['Job Description'].apply(lambda x: 
+                                            1 if 'r studio' in x.lower() else 0)
+dataFrame.rstudio_yn.value_counts()
+    
+#spark
+dataFrame['spark'] = dataFrame['Job Description'].apply(lambda x:
+                                            1 if 'spark' in x.lower() else 0)
+dataFrame.spark.value_counts()
+    
+#excel
+dataFrame['excel'] = dataFrame['Job Description'].apply(lambda x:
+                                            1 if 'spark' in x.lower() else 0)
+dataFrame.excel.value_counts()
+    
+#aws
+dataFrame['aws'] = dataFrame['Job Description'].apply(lambda x:
+                                            1 if 'aws' in x.lower() else 0)
+dataFrame.aws.value_counts()
 
+# dataFrame.columns
+
+dataFrame.to_csv('glassdoor_salary_data_cleaned.csv', index=False)
+print(pd.read_csv('glassdoor_salary_data_cleaned.csv'))
 
 """
 Extra code for parsing out salaries
