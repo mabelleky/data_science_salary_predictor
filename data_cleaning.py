@@ -106,6 +106,9 @@ dataFrame.aws.value_counts()
 dataFrame.to_csv('glassdoor_salary_data_cleaned.csv', index=False)
 print(pd.read_csv('glassdoor_salary_data_cleaned.csv'))
 
+
+
+
 """
 Extra code for parsing out salaries
 If data includes values 'per hour' and 'employer provided salary' in
