@@ -1,7 +1,7 @@
 """
 Created on Sat Aug 17  17:28:31 2020
 
-@author: mabelleky
+@author: Mabel
 """
 
 import GlassdoorScraper as gs
