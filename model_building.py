@@ -189,7 +189,7 @@ from sklearn.model_selection import GridSearchCV
     grid search which takes a sample 
 """
 
-parameters = {'n_estimators'1:range(10,300,10), 'criterion':('mse','mae'),
+parameters = {'n_estimators':range(10,300,10), 'criterion':('mse','mae'),
               'max_features':('auto', 'sqrt', 'log2')}
 
 gs = GridSearchCV(rf,parameters,scoring='neg_mean_absolute_error')
@@ -227,9 +227,21 @@ Exploration consideration: Take ratio of 90% from random forest
 and 10% from other models
 """
 
+#pickle the model is abstract it making it usable by other programs without
+# having to retrain it
+import pickle
+pickl = {'model' : gs.best_estimator_}
+pickle.dump( pickl, open('model_file' + ".p", "wb"))
 
+file_name = "model_file.p"
+with open(file_name, 'rb') as pickled:
+    data = pickle.load(pickled)
+    model = data['model']
 
+model.predict(X_test.iloc[1,:].values.reshape(1,-1))
 
+X_test.iloc[1,:]
+X_test.iloc[1,:].values
 
 
 
