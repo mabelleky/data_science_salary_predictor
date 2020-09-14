@@ -13,7 +13,7 @@ from sklearn.model_selection import train_test_split
 
 dataFrame = pd.read_csv('D:/DS_Projects/data_science_salary_predictor/eda_data.csv')
 
-# To-do list
+# To-do list for productionizing a ML model with Flask
 # - choose relevant volumns
 # - with categorical data, when building models make dummy variables or get dummy data
 # - creating dummy data increases # columns which has implications on what models to use
@@ -227,8 +227,8 @@ Exploration consideration: Take ratio of 90% from random forest
 and 10% from other models
 """
 
-#pickle the model is abstract it making it usable by other programs without
-# having to retrain it
+# pickle the model is to abstract it making it usable by other programs without
+#having to retrain it
 import pickle
 pickl = {'model' : gs.best_estimator_}
 pickle.dump( pickl, open('model_file' + ".p", "wb"))
@@ -240,12 +240,11 @@ with open(file_name, 'rb') as pickled:
 
 model.predict(X_test.iloc[1,:].values.reshape(1,-1))
 
-X_test.iloc[1,:]
-X_test.iloc[1,:].values
+# X_test.iloc[1,:]
+# X_test.iloc[1,:].values
 
 
-
-
+list(X_test.iloc[1,:])
 
 
 
